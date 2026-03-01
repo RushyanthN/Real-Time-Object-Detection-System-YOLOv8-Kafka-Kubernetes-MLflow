@@ -1,0 +1,39 @@
+project:
+  name: cv-detection-platform
+  version: "1.0"
+
+model:
+  architecture: yolov8s
+  pretrained: true
+  input_size: 640
+
+training:
+  epochs: 50
+  batch_size: 16
+  learning_rate: 0.001
+  patience: 10
+  device: 0
+  workers: 4
+
+dataset:
+  name: coco128.yaml
+  path: data/
+  classes: 80
+  train_split: 0.8
+  val_split: 0.2
+
+mlflow:
+  tracking_uri: http://localhost:5000
+  experiment_name: yolov8-object-detection
+
+inference:
+  confidence_threshold: 0.5
+  iou_threshold: 0.45
+  max_detections: 100
+  device: 0
+
+kafka:
+  bootstrap_servers: localhost:9092
+  topic_frames: video-frames
+  topic_detections: detection-results
+  group_id: detection-consumers

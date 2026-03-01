@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yolov8-inference
+  labels:
+    app: yolov8-inference
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: yolov8-inference
+  template:
+    metadata:
+      labels:
+        app: yolov8-inference
+    spec:
+      containers:
+      - name: yolov8-inference
+        image: yolov8-inference:v1
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8000
+        resources:
+          requests:
+            cpu: "500m"
+            memory: "512Mi"
+          limits:
+            cpu: "1000m"
+            memory: "1Gi"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 5

@@ -1,0 +1,25 @@
+# Datasets
+datasets/
+
+# Model weights
+*.pt
+*.onnx
+
+# Training runs & artifacts
+runs/
+mlartifacts/
+mlflow.db
+
+# Videos/images
+*.mp4
+*.avi
+test.jpg
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+
+# VS Code
+.vscode/
